@@ -1,0 +1,20 @@
+変更してください。
+
+Firestore構造は以下に変更で進めてください。
+
+- zoomState/current はそのまま維持
+- answers はトップレベル collection に変更
+- messages もトップレベル collection に変更
+
+方針：
+- answers/{id} に roundId, clientId, answeredAt, expiresAt を持たせる
+- messages/{id} に roundId, clientId, sentAt, expiresAt を持たせる
+- subscribeCorrectCount は roundId で where クエリ
+- subscribeChat は roundId で where + sentAt で orderBy
+- Firestore rules も新構造に合わせて更新
+
+重複正解防止は
+answers/{clientId}_{roundId}
+のようなIDで対応してください。
+
+変更後はデプロイ手順もあわせて教えてください。

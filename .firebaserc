@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "genshinquiz-eb690"
+  },
+  "targets": {
+    "genshinquiz-eb690": {
+      "hosting": {
+        "zoomup": [
+          "genshin-zoomup"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
