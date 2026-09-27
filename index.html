@@ -174,14 +174,36 @@
     .uko-about li{margin:2px 0;list-style:revert}
     .uko-about dt{font-weight:bold;margin-top:6px}
     .uko-about dd{margin:0 0 4px 1em}
+    .uko-about [hidden]{display:none!important}
     .uko-about.uko-about--float{margin:0;padding:0;max-width:none;display:inline-block}
     .uko-about--float>summary{padding:4px 10px;font-size:12px;background:rgba(255,255,255,.8);color:#333;white-space:nowrap}
     .uko-about--float .uko-about-body{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);width:min(92vw,560px);max-height:60vh;overflow:auto;margin:0;background:#fff;color:#333;box-shadow:0 6px 24px rgba(0,0,0,.18);z-index:950}
     </style>
     <details class="uko-about uko-about--float">
-      <summary>このサイトについて</summary>
-      <div class="uko-about-body"><h2>原神クイズ王とは</h2><p>原神の問題が次々に出題される、リアルタイムの早押しクイズゲームです。登録なしでいつでも参加できて、同じ時間に遊んでいる人と正解の早さを競えます。</p><h2>遊び方</h2><ul><li>1問の回答時間は20秒です。</li><li>答えはひらがなかカタカナで入力して送信します。</li><li>早く正解した人ほど上位になり、毎問TOP3が発表されます。</li></ul></div>
+      <summary><span data-uko-lang="ja">このサイトについて</span><span data-uko-lang="en" hidden>About this site</span></summary>
+      <div class="uko-about-body" data-uko-lang="ja"><h2>原神クイズ王とは</h2><p>原神の問題が次々に出題される、リアルタイムの早押しクイズゲームです。登録なしでいつでも参加できて、同じ時間に遊んでいる人と正解の早さを競えます。</p><h2>遊び方</h2><ul><li>1問の回答時間は20秒です。</li><li>答えはひらがなかカタカナで入力して送信します。</li><li>早く正解した人ほど上位になり、毎問TOP3が発表されます。</li></ul></div>
+      <div class="uko-about-body" data-uko-lang="en" lang="en" hidden><h2>What is Genshin Quiz?</h2><p>A real-time quick-answer quiz game where Genshin Impact questions come one after another. Join anytime without registering and compete with everyone playing at the same time. (Japanese only)</p><h2>How to play</h2><ul><li>You have 20 seconds to answer each question.</li><li>Type your answer in hiragana or katakana and send it.</li><li>The faster you answer correctly, the higher you rank. The TOP3 is announced after every question.</li></ul></div>
     </details>
+    <script>
+    (function(){
+      // 説明文の日英切り替え。言語ラジオがあるサイトはその選択、ないサイトは共通のlocalStorage('lang')に合わせる
+      var box=document.currentScript.previousElementSibling;
+      function cur(){
+        var r=document.querySelector('input[name="lang"]:checked');
+        if(r) return r.value==='en'?'en':'ja';
+        try{return localStorage.getItem('lang')==='en'?'en':'ja';}catch(e){return 'ja';}
+      }
+      function apply(){
+        var l=cur();
+        box.querySelectorAll('[data-uko-lang]').forEach(function(n){n.hidden=n.getAttribute('data-uko-lang')!==l;});
+      }
+      apply();
+      document.addEventListener('change',function(e){if(e.target&&e.target.name==='lang')setTimeout(apply,0);});
+      document.addEventListener('DOMContentLoaded',apply);
+      window.addEventListener('load',apply);
+      new MutationObserver(apply).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+    })();
+    </script>
   </footer>
 
   <!-- firebase-config.js は必ずユーザーが自分のFirebase設定を記入してください -->
