@@ -158,6 +158,30 @@
     </a>
     <span class="footer-label">＜交流用サーバー！</span>
     <span id="uko-account-status-slot"></span>
+    <!-- サイト説明(検索向け)。画像保存の範囲外に置くこと -->
+    <style>
+    .uko-about{max-width:760px;margin:32px auto 24px;padding:0 16px;box-sizing:border-box;text-align:left;font-size:14px;line-height:1.75;color:inherit;-webkit-user-select:text;user-select:text}
+    .uko-about>summary{cursor:pointer;list-style:none;display:inline-block;padding:6px 14px;border:1px solid rgba(128,128,128,.35);border-radius:999px;font-size:13px;opacity:.75}
+    .uko-about>summary:hover{opacity:1}
+    .uko-about>summary::-webkit-details-marker{display:none}
+    .uko-about>summary::before{content:"▶ "}
+    .uko-about[open]>summary::before{content:"▼ "}
+    .uko-about-body{margin-top:12px;padding:16px 20px;border:1px solid rgba(128,128,128,.25);border-radius:12px;background:rgba(128,128,128,.06)}
+    .uko-about h2{font-size:15px;font-weight:bold;margin:14px 0 6px;padding:0;border:0;background:none;color:inherit;text-align:left}
+    .uko-about h2:first-child{margin-top:0}
+    .uko-about p,.uko-about dl{margin:0 0 8px}
+    .uko-about ul,.uko-about ol{margin:0 0 8px;padding-left:1.5em}
+    .uko-about li{margin:2px 0;list-style:revert}
+    .uko-about dt{font-weight:bold;margin-top:6px}
+    .uko-about dd{margin:0 0 4px 1em}
+    .uko-about.uko-about--float{margin:0;padding:0;max-width:none;display:inline-block}
+    .uko-about--float>summary{padding:4px 10px;font-size:12px;background:rgba(255,255,255,.8);color:#333;white-space:nowrap}
+    .uko-about--float .uko-about-body{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);width:min(92vw,560px);max-height:60vh;overflow:auto;margin:0;background:#fff;color:#333;box-shadow:0 6px 24px rgba(0,0,0,.18);z-index:950}
+    </style>
+    <details class="uko-about uko-about--float">
+      <summary>このサイトについて</summary>
+      <div class="uko-about-body"><h2>原神クイズ王とは</h2><p>原神の問題が次々に出題される、リアルタイムの早押しクイズゲームです。登録なしでいつでも参加できて、同じ時間に遊んでいる人と正解の早さを競えます。</p><h2>遊び方</h2><ul><li>1問の回答時間は20秒です。</li><li>答えはひらがなかカタカナで入力して送信します。</li><li>早く正解した人ほど上位になり、毎問TOP3が発表されます。</li></ul></div>
+    </details>
   </footer>
 
   <!-- firebase-config.js は必ずユーザーが自分のFirebase設定を記入してください -->
