@@ -77,7 +77,6 @@ const laneActive   = new Array(LANE_COUNT).fill(false);
 // ============================================================
 async function init() {
   document.getElementById('appTitle').textContent = APP_NAME;
-  document.title = APP_NAME;
   document.getElementById('version').textContent = APP_VERSION;
 
   // クライアントIDを取得 or 生成
