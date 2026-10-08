@@ -2,12 +2,13 @@
 // Firestore の読み取り件数を、コレクションごとに数えて日別に集計する(2026-10-07、一時的な調査用)。
 // onSnapshot / getDocs / getDoc / getCountFromServer を、数えながら元の関数を呼ぶ版に差し替えている。
 // 画面には何も出さず、集計の書き込みに失敗しても何もしない。
-// 集計先: readStats/{日本時間の日付} の c.{サイト|コレクション|種類} に件数を足す(管理者だけが読める)。
+// 集計先: readStats/{日本時間の日付}_{時} の c.{サイト|コレクション|種類} に件数を足す(管理者だけが読める)。
+// 2026-10-08に1時間ごとのドキュメントに変更(時間帯ごとの内訳を見るため)。サイト名は管理画面などの下層フォルダも含める。
 // 調査が終わったら、各ファイルの import を "firebase-firestore.js" に戻してこのファイルを消す。
 import * as F from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 import { getApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
 
-const SITE = (location.pathname.split('/').filter(Boolean)[0] || 'root').slice(0, 30);
+const SITE = (location.pathname.split('/').filter((x) => x && !x.includes('.')).join('_') || 'root').slice(0, 40);
 const FLUSH_MS = 5 * 60 * 1000;
 let counts = {};
 
@@ -32,7 +33,7 @@ async function flush() {
   counts = {};
   try {
     const db = F.getFirestore(getApp());
-    const day = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
+    const day = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 13).replace('T', '_');
     const c = {};
     entries.forEach(([k, v]) => { c[k] = F.increment(v); });
     await F.setDoc(F.doc(db, 'readStats', day), { c, updatedAt: F.serverTimestamp() }, { merge: true });
