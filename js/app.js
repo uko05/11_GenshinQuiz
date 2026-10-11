@@ -7,7 +7,7 @@ import { initializeApp, getApps, getApp } from
 import {
   getFirestore, doc, setDoc, updateDoc, collection, query, where, serverTimestamp, runTransaction,
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
-import { getDoc, getDocs, onSnapshot } from './fsTracked.js'; // 読み取り件数の集計(調査用、fsTracked.js参照)
+import { getDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 import { APP_VERSION } from './version.js';
 
 // ============================================================
